@@ -3,11 +3,13 @@ use std::{
     io::{self, Write},
 };
 
-use libc::EXIT_FAILURE;
-use nix::errno::Errno;
+use nix::{
+    errno::Errno,
+    libc::{__errno_location, _exit, EXIT_FAILURE, abort, exit},
+};
 
 pub fn err_msg(errno: Errno, user_msg: String) {
-    let saved_errno = unsafe { *libc::__errno_location() };
+    let saved_errno = unsafe { *__errno_location() };
     let _ = io::stdout().flush();
     let _ = writeln!(
         io::stderr(),
@@ -16,7 +18,7 @@ pub fn err_msg(errno: Errno, user_msg: String) {
         user_msg,
     );
     unsafe {
-        *libc::__errno_location() = saved_errno;
+        *__errno_location() = saved_errno;
     }
 }
 
@@ -50,13 +52,13 @@ pub fn fatal(user_msg: String) -> ! {
 fn terminate(use_exit3: bool) -> ! {
     if let Ok(x) = env::var("EF_DUMPCORE") {
         if !x.is_empty() {
-            unsafe { libc::abort() }
+            unsafe { abort() }
         }
     }
 
     if use_exit3 {
-        unsafe { libc::exit(EXIT_FAILURE) }
+        unsafe { exit(EXIT_FAILURE) }
     } else {
-        unsafe { libc::_exit(EXIT_FAILURE) }
+        unsafe { _exit(EXIT_FAILURE) }
     }
 }

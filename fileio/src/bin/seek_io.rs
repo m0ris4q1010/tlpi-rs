@@ -10,7 +10,7 @@ use nix::{
     unistd::{Whence, close, lseek, read, write},
 };
 
-use lib::err_exit;
+use lib::{err_exit, exit_failure, exit_success};
 
 #[derive(Parser)]
 struct Cli {
@@ -97,7 +97,7 @@ fn main() {
 
     close(fd).unwrap_or_else(|e| err_exit(e, "close".into()));
 
-    std::process::exit(libc::EXIT_SUCCESS);
+    exit_success();
 }
 
 impl Display for Op {
@@ -117,21 +117,21 @@ impl From<&str> for Op {
             Some(b's') => {
                 let offset = s[1..].parse().unwrap_or_else(|e| {
                     eprintln!("Failed to parse offset: {}", e);
-                    std::process::exit(libc::EXIT_FAILURE);
+                    exit_failure();
                 });
                 Self::Seek { offset }
             }
             Some(b'r') => {
                 let length = s[1..].parse().unwrap_or_else(|e| {
                     eprintln!("Failed to parse length: {}", e);
-                    std::process::exit(libc::EXIT_FAILURE);
+                    exit_failure();
                 });
                 Self::Read { length }
             }
             Some(b'R') => {
                 let length = s[1..].parse().unwrap_or_else(|e| {
                     eprintln!("Failed to parse length: {}", e);
-                    std::process::exit(libc::EXIT_FAILURE);
+                    exit_failure();
                 });
                 Self::ReadHex { length }
             }
@@ -141,7 +141,7 @@ impl From<&str> for Op {
             }
             Some(_) | None => {
                 eprintln!("Argument must start with [rRws]: {}", s);
-                std::process::exit(libc::EXIT_FAILURE);
+                exit_failure();
             }
         }
     }

@@ -8,7 +8,7 @@ use nix::{
     unistd::{close, read, write},
 };
 
-use lib::err_exit;
+use lib::{err_exit, exit_success};
 
 const BUF_SIZE: usize = 1024;
 
@@ -57,5 +57,5 @@ fn main() {
     close(input_fd).unwrap_or_else(|e| err_exit(e, "close input".into()));
     close(output_fd).unwrap_or_else(|e| err_exit(e, "close output".into()));
 
-    std::process::exit(libc::EXIT_SUCCESS);
+    exit_success();
 }
