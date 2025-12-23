@@ -1,0 +1,11 @@
+[package]
+name = "fileio"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+lib.workspace = true
+
+clap.workspace = true
+libc.workspace = true
+nix.workspace = true
