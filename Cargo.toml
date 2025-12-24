@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["fileio", "lib", "proc"]
+members = ["fileio", "lib", "memalloc", "proc"]
 
 [workspace.dependencies]
 lib = { path = "./lib" }
