@@ -1,0 +1,12 @@
+[package]
+name = "time"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+lib.workspace = true
+
+chrono.workspace = true
+chrono-tz.workspace = true
+clap.workspace = true
+nix.workspace = true
