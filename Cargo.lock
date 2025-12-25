@@ -196,6 +196,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "proccred"
+version = "0.1.0"
+dependencies = [
+ "lib",
+ "nix",
+ "users_groups",
+]
+
+[[package]]
 name = "quote"
 version = "1.0.42"
 source = "registry+https://github.com/rust-lang/crates.io-index"
