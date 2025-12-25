@@ -1,9 +1,9 @@
 [workspace]
 resolver = "3"
-members = ["fileio", "lib", "memalloc", "proc"]
+members = ["fileio", "lib", "memalloc", "proc", "users_groups"]
 
 [workspace.dependencies]
 lib = { path = "./lib" }
 
 clap = { version = "4.5.53", features = ["derive"] }
-nix = { version = "0.30.1", features = ["env", "fs", "process", "uio"] }
+nix = { version = "0.30.1", features = ["env", "feature", "fs", "process", "uio", "user"] }
