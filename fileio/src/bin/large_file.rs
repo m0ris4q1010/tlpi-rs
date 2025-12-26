@@ -21,15 +21,15 @@ fn main() {
     let open_flags = OFlag::O_RDWR | OFlag::O_CREAT;
     let file_perms = Mode::S_IRUSR | Mode::S_IWUSR;
     let fd = open(cli.pathname.as_str(), open_flags, file_perms).unwrap_or_else(|e| {
-        err_exit(e, "open".into());
+        err_exit(e, "open");
     });
 
     lseek64(fd.as_fd(), cli.offset, Whence::SeekSet).unwrap_or_else(|e| {
-        err_exit(e, "lseek64".into());
+        err_exit(e, "lseek64");
     });
 
     write(fd.as_fd(), "test".as_bytes()).unwrap_or_else(|e| {
-        err_exit(e, "write".into());
+        err_exit(e, "write");
     });
 
     exit_success();

@@ -19,7 +19,7 @@ fn main() {
         unsafe {
             if nix::libc::putenv(p) != 0 {
                 let errno = Errno::from_raw(*nix::libc::__errno_location());
-                err_exit(errno, "putenv".into());
+                err_exit(errno, "putenv");
             }
         }
     }

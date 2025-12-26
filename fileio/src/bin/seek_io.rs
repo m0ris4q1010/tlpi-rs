@@ -38,21 +38,21 @@ fn main() {
         | Mode::S_IROTH
         | Mode::S_IWOTH;
     let fd = open(cli.file.as_str(), open_flags, file_perms).unwrap_or_else(|e| {
-        err_exit(e, "open".into());
+        err_exit(e, "open");
     });
 
     for op in ops {
         match op {
             Op::Seek { offset } => {
                 lseek(fd.as_fd(), offset, Whence::SeekSet).unwrap_or_else(|e| {
-                    err_exit(e, "lseek".into());
+                    err_exit(e, "lseek");
                 });
                 println!("{}: seek succeeded", op);
             }
             Op::Read { length } => {
                 let mut buf = vec![0; length];
                 let num_read = read(fd.as_fd(), &mut buf).unwrap_or_else(|e| {
-                    err_exit(e, "read".into());
+                    err_exit(e, "read");
                 });
                 if num_read == 0 {
                     println!("{}: end-of-file\n", op);
@@ -74,7 +74,7 @@ fn main() {
             Op::ReadHex { length } => {
                 let mut buf = vec![0; length];
                 let num_read = read(fd.as_fd(), &mut buf).unwrap_or_else(|e| {
-                    err_exit(e, "read".into());
+                    err_exit(e, "read");
                 });
                 if num_read == 0 {
                     println!("{}: end-of-file\n", op);
@@ -88,14 +88,14 @@ fn main() {
             }
             Op::Write { ref str } => {
                 let num_written = write(fd.as_fd(), str.as_bytes()).unwrap_or_else(|e| {
-                    err_exit(e, "write".into());
+                    err_exit(e, "write");
                 });
                 println!("{}: wrote {} bytes", op, num_written);
             }
         }
     }
 
-    close(fd).unwrap_or_else(|e| err_exit(e, "close".into()));
+    close(fd).unwrap_or_else(|e| err_exit(e, "close"));
 
     exit_success();
 }

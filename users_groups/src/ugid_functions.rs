@@ -8,7 +8,7 @@ use lib::err_exit;
 pub fn user_name_from_id(uid: Uid) -> Option<String> {
     User::from_uid(uid)
         .unwrap_or_else(|e| {
-            err_exit(e, "getpwuid_r".into());
+            err_exit(e, "getpwuid_r");
         })
         .map(|user| user.name)
 }
@@ -19,7 +19,7 @@ pub fn user_id_from_name(name: &str) -> Option<Uid> {
     }
     User::from_name(name)
         .unwrap_or_else(|e| {
-            err_exit(e, "getpwnam_r".into());
+            err_exit(e, "getpwnam_r");
         })
         .map(|user| user.uid)
 }
@@ -27,7 +27,7 @@ pub fn user_id_from_name(name: &str) -> Option<Uid> {
 pub fn group_name_from_id(gid: Gid) -> Option<String> {
     Group::from_gid(gid)
         .unwrap_or_else(|e| {
-            err_exit(e, "getgrgid_r".into());
+            err_exit(e, "getgrgid_r");
         })
         .map(|group| group.name)
 }
@@ -38,7 +38,7 @@ pub fn group_id_from_name(name: &str) -> Option<Gid> {
     }
     Group::from_name(name)
         .unwrap_or_else(|e| {
-            err_exit(e, "getgrnam_r".into());
+            err_exit(e, "getgrnam_r");
         })
         .map(|group| group.gid)
 }

@@ -23,11 +23,11 @@ fn main() {
     match open(cli.file.as_str(), open_flags, file_perms) {
         Ok(fd) => {
             println!("[PID {}] File \"{}\" already exists", getpid(), cli.file);
-            close(fd).unwrap_or_else(|e| err_exit(e, "close".into()));
+            close(fd).unwrap_or_else(|e| err_exit(e, "close"));
         }
         Err(e) => {
             if e != Errno::ENOENT {
-                err_exit(e, "open".into());
+                err_exit(e, "open");
             } else {
                 println!("[PID {}] File \"{}\" doesn't exist yet", getpid(), cli.file);
                 if cli.sleep {
@@ -38,14 +38,14 @@ fn main() {
             let open_flags = OFlag::O_WRONLY | OFlag::O_CREAT;
             let file_perms = Mode::S_IRUSR | Mode::S_IWUSR;
             let fd = open(cli.file.as_str(), open_flags, file_perms).unwrap_or_else(|e| {
-                err_exit(e, "open".into());
+                err_exit(e, "open");
             });
             println!(
                 "[PID {}] Creted file \"{}\" exclusively",
                 getpid(),
                 cli.file
             );
-            close(fd).unwrap_or_else(|e| err_exit(e, "close".into()));
+            close(fd).unwrap_or_else(|e| err_exit(e, "close"));
         }
     }
 

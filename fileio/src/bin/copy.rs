@@ -41,21 +41,21 @@ fn main() {
     let mut buf = [0; BUF_SIZE];
     loop {
         let num_read = read(input_fd.as_fd(), &mut buf).unwrap_or_else(|e| {
-            err_exit(e, "read".into());
+            err_exit(e, "read");
         });
         if num_read == 0 {
             break;
         }
         let num_written = write(output_fd.as_fd(), &buf[..num_read]).unwrap_or_else(|e| {
-            err_exit(e, "write() returned error".into());
+            err_exit(e, "write() returned error");
         });
         if num_written < num_read {
-            err_exit(Errno::UnknownErrno, "partial write occurred".into());
+            err_exit(Errno::UnknownErrno, "partial write occurred");
         }
     }
 
-    close(input_fd).unwrap_or_else(|e| err_exit(e, "close input".into()));
-    close(output_fd).unwrap_or_else(|e| err_exit(e, "close output".into()));
+    close(input_fd).unwrap_or_else(|e| err_exit(e, "close input"));
+    close(output_fd).unwrap_or_else(|e| err_exit(e, "close output"));
 
     exit_success();
 }

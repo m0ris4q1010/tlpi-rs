@@ -4,7 +4,7 @@ use lib::{err_exit, exit_success};
 
 fn main() {
     let uts_name = uname().unwrap_or_else(|e| {
-        err_exit(e, "uname".into());
+        err_exit(e, "uname");
     });
 
     let nodename = uts_name.nodename().to_str().expect("nodename");

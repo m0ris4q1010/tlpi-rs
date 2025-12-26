@@ -1,5 +1,6 @@
 use std::{
     env,
+    fmt::Display,
     io::{self, Write},
 };
 
@@ -8,7 +9,7 @@ use nix::{
     libc::{__errno_location, _exit, EXIT_FAILURE, abort, exit},
 };
 
-pub fn err_msg(errno: Errno, user_msg: String) {
+pub fn err_msg(errno: Errno, user_msg: impl Display) {
     let saved_errno = unsafe { *__errno_location() };
     let _ = io::stdout().flush();
     let _ = writeln!(
@@ -22,7 +23,7 @@ pub fn err_msg(errno: Errno, user_msg: String) {
     }
 }
 
-pub fn err_exit(errno: Errno, user_msg: String) -> ! {
+pub fn err_exit(errno: Errno, user_msg: impl Display) -> ! {
     let _ = io::stdout().flush();
     let _ = writeln!(
         io::stderr(),
@@ -33,7 +34,7 @@ pub fn err_exit(errno: Errno, user_msg: String) -> ! {
     terminate(true)
 }
 
-pub fn err_exit2(errno: Errno, user_msg: String) -> ! {
+pub fn err_exit2(errno: Errno, user_msg: impl Display) -> ! {
     let _ = writeln!(
         io::stderr(),
         "ERROR{} {}",
@@ -43,7 +44,7 @@ pub fn err_exit2(errno: Errno, user_msg: String) -> ! {
     terminate(false);
 }
 
-pub fn fatal(user_msg: String) -> ! {
+pub fn fatal(user_msg: impl Display) -> ! {
     let _ = io::stdout().flush();
     let _ = writeln!(io::stderr(), "ERROR: {}", user_msg,);
     terminate(true)

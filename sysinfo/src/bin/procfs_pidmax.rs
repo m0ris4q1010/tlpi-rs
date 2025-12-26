@@ -28,11 +28,11 @@ fn main() {
     };
     let file_perms = Mode::empty();
     let fd = open("/proc/sys/kernel/pid_max", open_flags, file_perms).unwrap_or_else(|e| {
-        err_exit(e, "open".into());
+        err_exit(e, "open");
     });
 
     let n = read(fd.as_fd(), &mut line).unwrap_or_else(|e| {
-        err_exit(e, "read".into());
+        err_exit(e, "read");
     });
     let old_val = str::from_utf8(&line[..n]).expect("valid utf-8");
 
@@ -43,13 +43,13 @@ fn main() {
 
     if let Some(val) = cli.new_val {
         if let Err(e) = lseek(fd.as_fd(), 0, Whence::SeekSet) {
-            err_exit(e, "lseek".into());
+            err_exit(e, "lseek");
         }
         let n = write(fd.as_fd(), val.as_bytes()).unwrap_or_else(|e| {
-            err_exit(e, "write".into());
+            err_exit(e, "write");
         });
         if n != val.len() {
-            fatal("write() failed".into());
+            fatal("write() failed");
         }
 
         let output = Command::new("cat")

@@ -32,13 +32,13 @@ fn display_process_times(msg: &str) {
     println!("{}", msg);
 
     let ts = clock_gettime(ClockId::CLOCK_PROCESS_CPUTIME_ID).unwrap_or_else(|e| {
-        err_exit(e, "clock_gettime".into());
+        err_exit(e, "clock_gettime");
     });
     let cpu_time = ts.tv_sec() as f64 + ts.tv_nsec() as f64 * 1e-9;
     println!("    clock_gettime() returns: {:.2} secs", cpu_time);
 
     let ru = getrusage(UsageWho::RUSAGE_SELF).unwrap_or_else(|e| {
-        err_exit(e, "getrusage".into());
+        err_exit(e, "getrusage");
     });
     let user = ru.user_time().tv_sec() as f64 + ru.user_time().tv_usec() as f64 * 1e-6;
     let system = ru.system_time().tv_sec() as f64 + ru.system_time().tv_usec() as f64 * 1e-6;

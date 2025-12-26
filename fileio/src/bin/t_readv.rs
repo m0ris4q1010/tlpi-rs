@@ -42,11 +42,11 @@ fn main() {
     let open_flags = OFlag::O_RDONLY;
     let file_perms = Mode::empty();
     let fd = open(cli.file.as_str(), open_flags, file_perms).unwrap_or_else(|e| {
-        err_exit(e, "open".into());
+        err_exit(e, "open");
     });
 
     let num_read = readv(fd.as_fd(), &mut iov).unwrap_or_else(|e| {
-        err_exit(e, "readv".into());
+        err_exit(e, "readv");
     });
 
     if num_read < tot_required {

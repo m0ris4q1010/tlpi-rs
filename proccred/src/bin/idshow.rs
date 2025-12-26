@@ -8,10 +8,10 @@ use users_groups::{group_name_from_id, user_name_from_id};
 
 fn main() {
     let resuid = getresuid().unwrap_or_else(|e| {
-        err_exit(e, "getresuid".into());
+        err_exit(e, "getresuid");
     });
     let resgid = getresgid().unwrap_or_else(|e| {
-        err_exit(e, "getresgid".into());
+        err_exit(e, "getresgid");
     });
     let fsuid = unsafe { setfsuid(0) };
     let fsgid = unsafe { setfsgid(0) };
@@ -41,7 +41,7 @@ fn main() {
     );
 
     let num_groups = getgroups().unwrap_or_else(|e| {
-        err_exit(e, "getgroups".into());
+        err_exit(e, "getgroups");
     });
     print!("Supplementary groups {}:", num_groups.len());
     for gid in num_groups {
