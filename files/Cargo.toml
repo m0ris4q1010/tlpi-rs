@@ -1,0 +1,12 @@
+[package]
+name = "files"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+lib.workspace = true
+users_groups.workspace = true
+
+chrono.workspace = true
+clap.workspace = true
+nix.workspace = true
