@@ -31,3 +31,15 @@
 ### (14.4) i-node
 
 ![ext2ファイルシステムでのファイルブロック](images/tlpi-fig-14-2.png)
+
+## [18] ディレクトリとリンク
+
+### (18.1) ディレクトリと（ハード）リンク
+
+i-node番号
+- 0: 未使用
+- 1: bad block
+
+![i-nodeとディレクトリ構造の関係(/etc/passwdの例)](images/tlpi-fig-18-1.png)
+
+![ハードリンクとシンボリックリンクの内部表現](images/tlpi-fig-18-2.png)
