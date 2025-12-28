@@ -43,3 +43,11 @@ i-node番号
 ![i-nodeとディレクトリ構造の関係(/etc/passwdの例)](images/tlpi-fig-18-1.png)
 
 ![ハードリンクとシンボリックリンクの内部表現](images/tlpi-fig-18-2.png)
+
+## [20] シグナル：基礎
+
+### (20.2) シグナル種類とディフォルト動作
+
+![Linuxのシグナル](images/tlpi-fig-20-1-1.png)
+
+![Linuxのシグナル続き](images/tlpi-fig-20-1-2.png)
