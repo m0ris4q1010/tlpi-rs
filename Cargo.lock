@@ -261,6 +261,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "inotify"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "lib",
+ "nix",
+]
+
+[[package]]
 name = "is_terminal_polyfill"
 version = "1.70.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"

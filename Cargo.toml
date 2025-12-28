@@ -1,6 +1,21 @@
 [workspace]
 resolver = "3"
-members = ["dirs_links","filebuff","fileio", "files", "lib", "memalloc", "proc", "proccred", "sysinfo", "syslim", "time", "users_groups", "xattr"]
+members = [
+    "dirs_links",
+    "filebuff",
+    "fileio",
+    "files",
+    "inotify",
+    "lib",
+    "memalloc",
+    "proc",
+    "proccred",
+    "sysinfo",
+    "syslim",
+    "time",
+    "users_groups",
+    "xattr",
+]
 
 [workspace.dependencies]
 lib = { path = "./lib" }
@@ -10,5 +25,16 @@ users_groups = { path = "./users_groups" }
 chrono = "0.4.42"
 chrono-tz = "0.10.4"
 clap = { version = "4.5.53", features = ["derive"] }
-nix = { version = "0.30.1", features = ["dir", "env", "feature", "fs", "process", "resource", "time", "uio", "user"] }
+nix = { version = "0.30.1", features = [
+    "dir",
+    "env",
+    "feature",
+    "fs",
+    "inotify",
+    "process",
+    "resource",
+    "time",
+    "uio",
+    "user",
+] }
 xattr = "1.6.1"
